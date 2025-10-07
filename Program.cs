@@ -20,6 +20,33 @@ if (File.Exists("sf2.json"))
     sf2List = result ?? new List<SF2Character>();
 }
 
+//menu 
+var choice = Console.ReadLine();
+    if (string.IsNullOrWhiteSpace(choice))
+        break;
+
+    switch (choice)
+    {
+        case "1":
+        
+        case "2":
+          
+        case "3":
+            Console.WriteLine("Enter character ID to remove:");
+       
+        case "4":
+            foreach (var c in sf2List)
+                Console.WriteLine(c.Display());
+            break;
+        case "5":
+            sf2List.Add(InputSF2Character());
+            File.WriteAllText("sf2.json", JsonSerializer.Serialize(sf2List));
+            break;
+        case "6":
+            Console.WriteLine("Enter character ID to remove:");
+            var sf2Input = Console.ReadLine();
+         
+    }
 
 
 
