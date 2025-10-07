@@ -20,57 +20,65 @@ if (File.Exists("sf2.json"))
     sf2List = result ?? new List<SF2Character>();
 }
 
-//menu 
-var choice = Console.ReadLine();
-if (string.IsNullOrWhiteSpace(choice))
-    break;
-
-switch (choice)
+while (true)
 {
-    case "1":
-        foreach (var c in donkeyKongList)
-            Console.WriteLine(c.Display());
-        break;
+    Console.WriteLine("1. Display Donkey Kong Characters");
+    Console.WriteLine("2. Add Donkey Kong Character");
+    Console.WriteLine("3. Remove Donkey Kong Character");
+    Console.WriteLine("4. Display Street Fighter II Characters");
+    Console.WriteLine("5. Add Street Fighter II Character");
+    Console.WriteLine("6. Remove Street Fighter II Character");
+    Console.WriteLine("Enter to quit.");
 
-    case "2":
-        donkeyKongList.Add(InputDonkeyKongCharacter());
-        File.WriteAllText("dk.json", JsonSerializer.Serialize(donkeyKongList));
+    var choice = Console.ReadLine();
+    if (string.IsNullOrWhiteSpace(choice))
         break;
-
-    case "3":
-        Console.WriteLine("Enter character ID to remove:");
-        var input = Console.ReadLine();
-        if (string.IsNullOrEmpty(input) || !ulong.TryParse(input, out ulong id))
-        {
-            Console.WriteLine("Invalid ID input.");
-        }
-        else
-        {
-            donkeyKongList.RemoveAll(x => x.Id == id);
+                        //menu
+    switch (choice)
+    {
+        case "1":
+            foreach (var c in donkeyKongList)
+                Console.WriteLine(c.Display());
+            break;
+        case "2":
+            donkeyKongList.Add(InputDonkeyKongCharacter());
             File.WriteAllText("dk.json", JsonSerializer.Serialize(donkeyKongList));
-        }
-        break;
-    case "4":
-        foreach (var c in sf2List)
-            Console.WriteLine(c.Display());
-        break;
-    case "5":
-        sf2List.Add(InputSF2Character());
-        File.WriteAllText("sf2.json", JsonSerializer.Serialize(sf2List));
-        break;
-    case "6":
-        Console.WriteLine("Enter character ID to remove:");
-        var sf2Input = Console.ReadLine();
-        if (string.IsNullOrEmpty(sf2Input) || !ulong.TryParse(sf2Input, out ulong sf2Id))
-        {
-            Console.WriteLine("Invalid ID input.");
-        }
-        else
-        {
-            sf2List.RemoveAll(x => x.Id == sf2Id);
+            break;
+        case "3":
+            Console.WriteLine("Enter character ID to remove:");
+            var input = Console.ReadLine();
+            if (string.IsNullOrEmpty(input) || !ulong.TryParse(input, out ulong id))
+            {
+                Console.WriteLine("Invalid ID input.");
+            }
+            else
+            {
+                donkeyKongList.RemoveAll(x => x.Id == id);
+                File.WriteAllText("dk.json", JsonSerializer.Serialize(donkeyKongList));
+            }
+            break;
+        case "4":
+            foreach (var c in sf2List)
+                Console.WriteLine(c.Display());
+            break;
+        case "5":
+            sf2List.Add(InputSF2Character());
             File.WriteAllText("sf2.json", JsonSerializer.Serialize(sf2List));
-        }
-        break;
+            break;
+        case "6":
+            Console.WriteLine("Enter character ID to remove:");
+            var sf2Input = Console.ReadLine();
+            if (string.IsNullOrEmpty(sf2Input) || !ulong.TryParse(sf2Input, out ulong sf2Id))
+            {
+                Console.WriteLine("Invalid ID input.");
+            }
+            else
+            {
+                sf2List.RemoveAll(x => x.Id == sf2Id);
+                File.WriteAllText("sf2.json", JsonSerializer.Serialize(sf2List));
+            }
+            break;
+    }
 }
 
 DonkeyKongCharacter InputDonkeyKongCharacter()
@@ -84,12 +92,13 @@ DonkeyKongCharacter InputDonkeyKongCharacter()
     Console.WriteLine("ID:");
     var idInput = Console.ReadLine();
     ulong id = 0;
-        if (string.IsNullOrEmpty(idInput) || !ulong.TryParse(idInput, out id))
+    if (string.IsNullOrEmpty(idInput) || !ulong.TryParse(idInput, out id))
     {
         Console.WriteLine("Invalid ID input. Defaulting to 0.");
     }
     return new DonkeyKongCharacter { Id = id, Name = name, Species = species, Description = desc };
 }
+
 SF2Character InputSF2Character()
 {
     Console.WriteLine("Name:");
@@ -108,81 +117,3 @@ SF2Character InputSF2Character()
     }
     return new SF2Character { Id = id, Name = name, Description = desc, Moves = moves };
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
