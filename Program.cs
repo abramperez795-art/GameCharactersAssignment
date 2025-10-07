@@ -73,6 +73,18 @@ switch (choice)
         break;
 }
 
+DonkeyKongCharacter InputDonkeyKongCharacter()
+{
+    Console.WriteLine("Name:");
+    var name = Console.ReadLine() ?? "";
+    Console.WriteLine("Species:");
+    var species = Console.ReadLine() ?? "";
+    Console.WriteLine("Description:");
+    var desc = Console.ReadLine() ?? "";
+    Console.WriteLine("ID:");
+    var idInput = Console.ReadLine();
+    ulong id = 0;
+}
 
 
 
