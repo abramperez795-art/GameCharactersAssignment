@@ -90,7 +90,24 @@ DonkeyKongCharacter InputDonkeyKongCharacter()
     }
     return new DonkeyKongCharacter { Id = id, Name = name, Species = species, Description = desc };
 }
-
+SF2Character InputSF2Character()
+{
+    Console.WriteLine("Name:");
+    var name = Console.ReadLine() ?? "";
+    Console.WriteLine("Description:");
+    var desc = Console.ReadLine() ?? "";
+    Console.WriteLine("Moves (comma separated):");
+    var movesInput = Console.ReadLine();
+    var moves = movesInput != null ? movesInput.Split(',').Select(x => x.Trim()).ToList() : new List<string>();
+    Console.WriteLine("ID:");
+    var idInput = Console.ReadLine();
+    ulong id = 0;
+    if (string.IsNullOrEmpty(idInput) || !ulong.TryParse(idInput, out id))
+    {
+        Console.WriteLine("Invalid ID input. Defaulting to 0.");
+    }
+    return new SF2Character { Id = id, Name = name, Description = desc, Moves = moves };
+}
 
 
 
