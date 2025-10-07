@@ -84,7 +84,13 @@ DonkeyKongCharacter InputDonkeyKongCharacter()
     Console.WriteLine("ID:");
     var idInput = Console.ReadLine();
     ulong id = 0;
+        if (string.IsNullOrEmpty(idInput) || !ulong.TryParse(idInput, out id))
+    {
+        Console.WriteLine("Invalid ID input. Defaulting to 0.");
+    }
+    return new DonkeyKongCharacter { Id = id, Name = name, Species = species, Description = desc };
 }
+
 
 
 
