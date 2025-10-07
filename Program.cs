@@ -22,37 +22,57 @@ if (File.Exists("sf2.json"))
 
 //menu 
 var choice = Console.ReadLine();
-    if (string.IsNullOrWhiteSpace(choice))
+if (string.IsNullOrWhiteSpace(choice))
+    break;
+
+switch (choice)
+{
+    case "1":
+        foreach (var c in donkeyKongList)
+            Console.WriteLine(c.Display());
         break;
 
-    switch (choice)
-    {
-        case "1":
-          foreach (var c in donkeyKongList)
-                Console.WriteLine(c.Display());
-            break;
-        
-        case "2":
-           donkeyKongList.Add(InputDonkeyKongCharacter());
+    case "2":
+        donkeyKongList.Add(InputDonkeyKongCharacter());
+        File.WriteAllText("dk.json", JsonSerializer.Serialize(donkeyKongList));
+        break;
+
+    case "3":
+        Console.WriteLine("Enter character ID to remove:");
+        var input = Console.ReadLine();
+        if (string.IsNullOrEmpty(input) || !ulong.TryParse(input, out ulong id))
+        {
+            Console.WriteLine("Invalid ID input.");
+        }
+        else
+        {
+            donkeyKongList.RemoveAll(x => x.Id == id);
             File.WriteAllText("dk.json", JsonSerializer.Serialize(donkeyKongList));
-            break;
-          
-        case "3":
-            Console.WriteLine("Enter character ID to remove:");
-       
-        case "4":
-            foreach (var c in sf2List)
-                Console.WriteLine(c.Display());
-            break;
-        case "5":
-            sf2List.Add(InputSF2Character());
+        }
+        break;
+    case "4":
+        foreach (var c in sf2List)
+            Console.WriteLine(c.Display());
+        break;
+    case "5":
+        sf2List.Add(InputSF2Character());
+        File.WriteAllText("sf2.json", JsonSerializer.Serialize(sf2List));
+        break;
+    case "6":
+        Console.WriteLine("Enter character ID to remove:");
+        var sf2Input = Console.ReadLine();
+        if (string.IsNullOrEmpty(sf2Input) || !ulong.TryParse(sf2Input, out ulong sf2Id))
+        {
+            Console.WriteLine("Invalid ID input.");
+        }
+        else
+        {
+            sf2List.RemoveAll(x => x.Id == sf2Id);
             File.WriteAllText("sf2.json", JsonSerializer.Serialize(sf2List));
-            break;
-        case "6":
-            Console.WriteLine("Enter character ID to remove:");
-            var sf2Input = Console.ReadLine();
-         
-    }
+        }
+        break;
+}
+
 
 
 
