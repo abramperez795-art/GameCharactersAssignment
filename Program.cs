@@ -28,8 +28,14 @@ var choice = Console.ReadLine();
     switch (choice)
     {
         case "1":
+          foreach (var c in donkeyKongList)
+                Console.WriteLine(c.Display());
+            break;
         
         case "2":
+           donkeyKongList.Add(InputDonkeyKongCharacter());
+            File.WriteAllText("dk.json", JsonSerializer.Serialize(donkeyKongList));
+            break;
           
         case "3":
             Console.WriteLine("Enter character ID to remove:");
