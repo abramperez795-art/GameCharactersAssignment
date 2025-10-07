@@ -1,2 +1,6 @@
-﻿// See https://aka.ms/new-console-template for more information
-Console.WriteLine("Hello, World!");
+﻿using System;
+using NLog;
+using System.Reflection;
+using System.Text.Json;
+
+string path = Directory.GetCurrentDirectory() + "//nlog.config";
